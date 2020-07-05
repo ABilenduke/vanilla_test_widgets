@@ -1,0 +1,11 @@
+version: "3.8"
+services:
+  vanilla_php_fpm:
+    environment:
+        SERVICE_TAGS: dev
+    volumes:
+      - ./backend/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+
+  vanilla_nginx:
+    volumes:
+      - ./nginx/conf.d/development:/etc/nginx/conf.d

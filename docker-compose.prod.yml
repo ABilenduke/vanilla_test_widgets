@@ -1,0 +1,9 @@
+version: "3.8"
+services:
+    vanilla_php_fpm:
+        environment:
+            SERVICE_TAGS: prod
+
+    vanilla_nginx:
+        volumes:
+            - ./nginx/conf.d/production/:/etc/nginx/conf.d/
