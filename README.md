@@ -1,6 +1,6 @@
 ## About Vanilla Widgets API
 
-Soapbox is single page application blog built using Laravel, Vue and Vuetify.
+This application is a REST api to allow authenticated users the ability to create, update, retrive and delete widgets. It was made using Laravel.
 
 ## Setup
 
@@ -27,4 +27,26 @@ Follow the steps below to run the site locally.
 - `docker-compose exec vanilla_php_fpm php artisan key:generate`
 - `docker-compose exec vanilla_php_fpm php artisan jwt:secret`
 - `docker-compose exec vanilla_php_fpm php artisan migrate`
-- `docker-compose exec vanilla_php_fpm php artisan config:clear`
+- `docker-compose exec vanilla_php_fpm php artisan config:cache`
+
+#### Use the application
+* NOTE: All requests to the api must be JSON. You will need the header 'Accept: application/json' for all requests. To post or patch information you will need the header 'Content-Type: application/json'
+
+- Register a user by sending a POST request to '/api/register' with the following json structure
+- - 'name' => 'string, maximum 255'
+- - 'email' => 'string, valid email address'
+- - 'password' => 'string, minimum 8 characters'
+- - 'password_confirmation' => 'string, matching password'
+- Login to recieve the JWT by sending a POST request to '/api/login' with the following json structure
+- - 'email' => 'string, valid email address'
+- - 'password' => 'string, minimum 8 characters'
+- - use the token as a bearer token for all widget requests
+- Create a widget by sending a POST request to '/api/widget' with the following json structure
+- - 'name' => 'string, maximum 20 characters'
+- - 'description' => '(optional) string,  maximum 100 characters'
+- Update a widget by sending a PATCH request to '/api/widget/{widget_id}' with the following json structure
+- - 'name' => 'string, maximum 20 characters'
+- - 'description' => '(optional) string,  maximum 100 characters'
+- Retrieve an individual widget by sending a GET request to '/api/widget/{widget_id}', no body is required
+- Retrieve all widgets by sending a GET request to '/api/widget', no body is required
+- Delete a widget by sending a DELETE request to '/api/widget/{widget_id}', no body is required
